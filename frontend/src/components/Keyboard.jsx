@@ -2,7 +2,7 @@ import Key from './Key'
 
 export default function Keyboard({ avisarClique }) {
     return (
-        <div className='teclado'>
+        <div className='teclado' translate='no'>
             <Key nota='C'  tipo='branca' avisarClique={avisarClique}/>
             <Key nota='C#' tipo='preta'  avisarClique={avisarClique}/>
             <Key nota='D'  tipo='branca' avisarClique={avisarClique}/>
