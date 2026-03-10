@@ -9,22 +9,30 @@ const frequencias = {
   'G#': 415.30, 'A': 440.00, 'A#': 466.16, 'B': 493.88
 }
 
-function tocarSomDaNota(nota) {
-  const contexto = new (window.AudioContext || window.webkitAudioContext) ()
+let contextoDeAudio = null;
 
-  const oscilador = contexto.createOscillator()
-  const volume = contexto.createGain()
+function tocarSomDaNota(nota) {
+  if (!contextoDeAudio) {
+    contextoDeAudio = new (window.AudioContext || window.webkitAudioContext) ()
+  }
+
+  if (contextoDeAudio.state === 'suspended') {
+    contextoDeAudio.resume();
+  }
+
+  const oscilador = contextoDeAudio.createOscillator()
+  const volume = contextoDeAudio.createGain()
 
   oscilador.type = 'triangle'
   oscilador.frequency.value = frequencias[nota]
 
   oscilador.connect(volume)
-  volume.connect(contexto.destination)
+  volume.connect(contextoDeAudio.destination)
 
   oscilador.start()
-  volume.gain.setValueAtTime(1, contexto.currentTime)
-  volume.gain.exponentialRampToValueAtTime(0.001, contexto.currentTime + 1.5)
-  oscilador.stop(contexto.currentTime + 1.5)
+  volume.gain.setValueAtTime(1, contextoDeAudio.currentTime)
+  volume.gain.exponentialRampToValueAtTime(0.001, contextoDeAudio.currentTime + 1.5)
+  oscilador.stop(contextoDeAudio.currentTime + 1.5)
 }
 
 function App() {
