@@ -5,7 +5,7 @@ import musicaFundo from '../assets/audio/musica.m4a'
 
 export default function Surpresa() {
     return (
-        <div className='mural'>
+        <div className='mural' translate='no'>
             <audio src={musicaFundo} autoPlay loop></audio>
             <div className='polaroid'>
                 <img src={foto1} alt="Nós dois" />
