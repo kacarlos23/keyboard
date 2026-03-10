@@ -54,8 +54,11 @@ function App() {
     const palavraTocada = novaListaDeNotas.join('')
     console.log("Senha que está sendo formada: ", palavraTocada)
 
+    const senhasValidas = ['CDEFG', 'CCDE', 'CBCG'] // Lista de possibilidades para desbloquear a surpresa
+    const acertou = senhasValidas.some(senhaSecreta => palavraTocada.includes(senhaSecreta))
+
     // Confere se o padrao de notas está no meio das notas tocadas
-    if (palavraTocada.includes('CDEFG')) {
+    if (acertou) {
       setTaDesbloqueado(true) 
     }
   }
