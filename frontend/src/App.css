@@ -1,0 +1,148 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh; /* Ocupa 100% da altura da tela */
+  display: flex;
+  justify-content: center; /* Centraliza na horizontal */
+  align-items: center; /* Centraliza na vertical */
+  background-color: #f4f4f9; /* Um fundo levemente cinza/pastel destaca o branco das fotos! */
+}
+
+#root {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 1. O MURAL (A mesa onde as fotos estão jogadas) */
+.mural {
+  display: flex;
+  flex-wrap: wrap; /* Permite que as fotos desçam de linha se a tela for pequena */
+  justify-content: center; /* Centraliza tudo */
+  gap: 30px; /* Dá um respiro entre as fotos */
+  padding: 50px;
+}
+
+/* 2. A POLAROID (O papel branco) */
+.polaroid {
+  background-color: white;
+  /* O padding é o segredo: cria a borda branca ao redor da imagem */
+  padding: 15px 15px 40px 15px; 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra para dar o efeito 3D de papel */
+  width: 350px; /* Tamanho fixo para todas ficarem iguais */
+  border-radius: 4px; /* Deixa as pontinhas levemente arredondadas */
+  
+  /* Um efeitinho extra pra quando ela passar o mouse por cima! */
+  transition: transform 0.3s; 
+}
+
+.polaroid:hover {
+  transform: scale(1.1); /* Dá um zoom de 10% na foto ao passar o mouse */
+  z-index: 10;
+}
+
+/* 3. A IMAGEM DENTRO DA POLAROID */
+.polaroid img {
+  width: 100%; /* Faz a foto respeitar o tamanho do papel branco */
+  height: 350px; /* Deixa todas com a mesma altura */
+  object-fit: cover; /* Corta a imagem bonitinho sem achatar a cara de vocês */
+}
+
+/* 4. A LEGENDA ESCRITA "À MÃO" */
+.polaroid p {
+  color: #333;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Dá um ar de escrita manual */
+}
+
+/* 5. A CEREJA DO BOLO: As inclinadas aleatórias */
+.polaroid:nth-child(even) {
+  transform: rotate(5deg); /* As fotos pares inclinam um pouco pra direita */
+}
+.polaroid:nth-child(odd) {
+  transform: rotate(-3deg); /* As fotos ímpares inclinam um pouco pra esquerda */
+}
+
+/* ========================================================================*/
+
+/* 1. A CAIXA DO PIANO (O fundo escuro que segura as teclas) */
+.teclado {
+  display: flex;
+  justify-content: center;
+  background-color: #1a1a1a; /* Cor imitando a madeira escura do piano */
+  padding: 30px 15px 15px 15px; /* Espaço maior em cima para dar profundidade */
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Sombra pesada na mesa */
+  gap: 1px; /* Espaço minúsculo entre uma tecla e outra */
+  margin-bottom: 40px; /* Descola o teclado dos outros textos */
+}
+
+/* A BASE IGUAL PARA TODAS AS TECLAS */
+.tecla {
+  cursor: pointer;
+  border-radius: 0 0 8px 8px; /* Arredonda só embaixo */
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tecla:focus {
+  outline: none;
+}
+
+/* 2. O VISUAL DAS BRANCAS */
+.branca {
+  width: 60px;
+  height: 220px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  color: #777;
+  font-size: 1.2rem;
+  z-index: 1; /* Fica no andar de baixo */
+  
+  box-shadow: 
+    inset 0 0 5px rgba(0,0,0,0.1),
+    0 5px 0 #cccccc,
+    0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.branca:active {
+  background-color: #f8f8f8;
+  transform: translateY(5px);
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1), 0 0px 0 #cccccc, 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. O VISUAL DAS PRETAS (Aqui tá o truque!) */
+.preta {
+  width: 40px;
+  height: 140px;
+  background-color: #111; /* Quase preto absoluto */
+  z-index: 2; /* Fica no andar de cima, passando por cima das brancas */
+  
+  /* MARGEM NEGATIVA: É isso que puxa as brancas pra debaixo dela! */
+  margin-left: -20px;
+  margin-right: -20px;
+  
+  border-radius: 0 0 4px 4px; /* Mais quadradinha embaixo */
+  box-shadow: 
+    inset 0 0 3px rgba(255,255,255,0.2), /* Brilhinho em cima */
+    0 4px 0 #000000,
+    0 5px 10px rgba(0, 0, 0, 0.6); /* Sombra mais forte */
+}
+
+.preta:active {
+  background-color: #000;
+  transform: translateY(3px); /* Afunda menos que a branca */
+  box-shadow: inset 0 0 3px rgba(255,255,255,0.2), 0 1px 0 #000000, 0 2px 3px rgba(0, 0, 0, 0.6);
+}
